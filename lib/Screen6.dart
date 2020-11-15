@@ -7,7 +7,7 @@ class Screen6 extends StatefulWidget {
 }
 
 class _Screen6State extends State<Screen6> {
-  var t = 'ini berasal dari variabel';
+  var t = 'ini berasal dari variabel t kecil';
   var showT2 = true;
 
   @override
