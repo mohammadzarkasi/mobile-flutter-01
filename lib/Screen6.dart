@@ -14,7 +14,7 @@ class _Screen6State extends State<Screen6> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Statefull widget'),
+        title: Text('Demo Statefull Widget'),
       ),
       body: Center(
         child: Column(
