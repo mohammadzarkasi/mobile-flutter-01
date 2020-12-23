@@ -15,8 +15,9 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
-  CameraController _cameraController;
   var cameraReady = false;
+
+  CameraController _cameraController;
 
   void initState() {
     super.initState();
@@ -49,15 +50,13 @@ class _CameraScreenState extends State<CameraScreen> {
         title: Text('Camera'),
       ),
       body: Center(
-        child: cameraReady == true
-            ? this.buildCameraView()
-            : this.buildCameraPreparing(),
+        child: cameraReady == true ? this.buildCameraView() : this.buildCameraPreparing(),
       ),
       floatingActionButton: cameraReady ? this.buildCameraButton() : null,
     );
   }
 
-  buildCameraPreparing() {
+  Widget buildCameraPreparing() {
     return Column(
       children: [
         Text('Menyiapkan kamera....'),
@@ -86,8 +85,7 @@ class _CameraScreenState extends State<CameraScreen> {
     var appsupdir = await pathprov.getApplicationSupportDirectory();
 
     var extstor1 = await exstor.ExtStorage.getExternalStorageDirectory();
-    var extstor2 = await exstor.ExtStorage.getExternalStoragePublicDirectory(
-        exstor.ExtStorage.DIRECTORY_DOCUMENTS);
+    var extstor2 = await exstor.ExtStorage.getExternalStoragePublicDirectory(exstor.ExtStorage.DIRECTORY_DOCUMENTS);
 
     // var downDir = await pathprov.getDownloadsDirectory();
     // var libdir = await pathprov.getLibraryDirectory();
@@ -102,31 +100,31 @@ class _CameraScreenState extends State<CameraScreen> {
     // saveDir = downDir.path;
     // saveDir = libdir.path;
     var dt = DateTime.now();
-    var skrg =
-        '${dt.year}-${dt.month}-${dt.day}-${dt.hour}-${dt.minute}-${dt.second}.png';
+    var skrg = '${dt.year}-${dt.month}-${dt.day}-${dt.hour}-${dt.minute}-${dt.second}.png';
 
     var savePath = mypath.join(saveDir, skrg);
 
     print('save path = $savePath');
 
     var permstatus = await permhand.Permission.storage.status;
-      print('CAMERA SCREEN: permission: ${permstatus}--');
+    print('CAMERA SCREEN: permission: $permstatus--');
+
     if (permstatus.isUndetermined) {
-      Map<permhand.Permission, permhand.PermissionStatus> statuses =
-          await [permhand.Permission.storage].request();
-      if (statuses[permhand.Permission.storage] ==
-          permhand.PermissionStatus.granted) {
+      Map<permhand.Permission, permhand.PermissionStatus> statuses = await [permhand.Permission.storage].request();
+
+      if (statuses[permhand.Permission.storage] == permhand.PermissionStatus.granted) {
         print('permission granted, saving file');
         _cameraController.takePicture().then((file) {
           file.saveTo(savePath);
         });
       }
-    } else  {
+    } else {
       print('permission already granted, saving file');
       _cameraController.takePicture().then((file) {
         file.saveTo(savePath);
       });
-    } 
+    }
+
     // else {
     //   print('permission: ${permstatus}');
     //   Map<permhand.Permission, permhand.PermissionStatus> statuses =

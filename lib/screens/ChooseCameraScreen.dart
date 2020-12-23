@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart' as cam; 
+import 'package:camera/camera.dart' as cam;
 import 'package:tes_flutter/screens/CameraScreen.dart';
 
 class ChooseCameraScreen extends StatefulWidget {
@@ -34,9 +34,7 @@ class _ChooseCameraScreenState extends State<ChooseCameraScreen> {
         title: Text('Pilih Kamera'),
       ),
       body: Center(
-        child: listCameras.length > 0
-            ? this.buildListCamera()
-            : this.buildNoCameraFound(),
+        child: listCameras.length > 0 ? this.buildListCamera() : this.buildNoCameraFound(),
       ),
     );
   }

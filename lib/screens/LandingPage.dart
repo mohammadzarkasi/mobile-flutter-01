@@ -9,7 +9,6 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  
   Future<bool> checkPernahTour() async {
     var sp = await SharedPreferences.getInstance();
     var pernah = sp.getBool('sudah-tour4');
@@ -28,8 +27,7 @@ class _LandingScreenState extends State<LandingScreen> {
         builder: (ctx, AsyncSnapshot<bool> snapshot) {
           print('snapshot: ' + snapshot.toString());
           // jika proses future nya sudah selesai
-          if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.data == true) {
+          if (snapshot.connectionState == ConnectionState.done && snapshot.data == true) {
             print('sudah pernah tur, tampilkan home');
             return HomeScreen();
           } else {
