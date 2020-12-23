@@ -32,6 +32,17 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  shared_preferences: ^0.5.12+4
+  camera:
+  path_provider:
+  path:
+  ext_storage:
+  permission_handler:
+  flutter_launcher_name: ^0.0.1
+
+flutter_launcher_name:
+  name: "abc_flutter"
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
