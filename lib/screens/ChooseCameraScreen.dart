@@ -25,14 +25,14 @@ class _ChooseCameraScreenState extends State<ChooseCameraScreen> {
       setState(() {});
       print('jumlah kamera: ${listCameras.length}');
     });
+
+    print("CHOOSE CAMERA SCREEN selesai");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Pilih Kamera'),
-      ),
+      appBar: AppBar(title: Text('Pilih Kamera')),
       body: Center(
         child: listCameras.length > 0 ? this.buildListCamera() : this.buildNoCameraFound(),
       ),
@@ -41,11 +41,13 @@ class _ChooseCameraScreenState extends State<ChooseCameraScreen> {
 
   Widget buildListCamera() {
     var index = 0;
+    var children = listCameras.map((camera) {
+      index++;
+      return buildItemCamera(camera, index);
+    }).toList();
+
     return Column(
-      children: listCameras.map((camera) {
-        index++;
-        return buildItemCamera(camera, index);
-      }).toList(),
+      children: children,
     );
   }
 
@@ -58,7 +60,7 @@ class _ChooseCameraScreenState extends State<ChooseCameraScreen> {
       onPressed: () {
         print('button $index pressed');
         Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) {
-          return CameraScreen(camera: camera);
+          return new CameraScreen(camera: camera);
         }));
       },
       child: Text('Camera $index $posisiKamera'),

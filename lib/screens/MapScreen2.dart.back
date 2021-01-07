@@ -1,0 +1,96 @@
+import 'dart:math' as mathdart;
+import 'package:flutter/material.dart';
+import 'package:mapbox_gl/mapbox_gl.dart' as mb;
+
+class MapScreen extends StatefulWidget {
+  @override
+  _MapScreenState createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  var token = 'pk.eyJ1IjoibW96YXIiLCJhIjoiY2tqaGExcG9wOTZ6cDJxbGJkN3N3d3g1ZSJ9.MwabQuwSTVdx2YDgAoV6Rg';
+
+  mb.MapboxMapController mapController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(title: Text('Map Screen')),
+      body: Center(
+        child: Column(
+          children: [
+            buildMap(),
+            buildBtnBottomRow(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildMap() {
+    return Container(
+      height: 400,
+      child: mb.MapboxMap(
+        accessToken: token,
+        styleString: 'mapbox://styles/mapbox/streets-v11',
+        initialCameraPosition: new mb.CameraPosition(
+          target: mb.LatLng(-8.1766639, 113.6916075),
+          zoom: 8,
+        ),
+        onMapCreated: mapCreated,
+        onMapClick: mapClicked,
+      ),
+    );
+  }
+
+  void mapClicked(mathdart.Point<double> point, mb.LatLng latlng){
+    if(mapController != null){
+      mapController.addCircle(
+        new mb.CircleOptions(
+          circleRadius: 8,
+          circleColor: 'red',
+          circleOpacity: 1,
+          geometry: latlng,
+          draggable: false,
+        ),
+      );
+    }
+  }
+
+  void mapCreated(mb.MapboxMapController controller) {
+    mapController = controller;
+    print('map created');
+
+    var lokasi = mb.LatLng(-8.1766639, 113.6916075);
+
+    mapController.addCircle(new mb.CircleOptions(
+      circleRadius: 8,
+      circleColor: 'blue',
+      circleOpacity: 1,
+      geometry: lokasi,
+      draggable: false,
+    ));
+  }
+
+  Widget buildBtnBottomRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        RaisedButton(
+          child: Text('Re-center'),
+          onPressed: () {
+            var center = new mb.LatLng(-8.1766639, 113.6916075);
+            var updatedLoc = mb.CameraUpdate.newLatLng(center);
+            if (mapController != null) {
+              mapController.animateCamera(updatedLoc);
+            }
+            else {
+              print('map controller is null');
+            }
+          },
+        ),
+        RaisedButton(onPressed: () {}, child: Text('Btn2')),
+      ],
+    );
+  }
+}

@@ -32,6 +32,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mapbox_gl: ^0.9.0
+#  location: ^3.2.1
+  geolocator: ^6.1.13
   shared_preferences: ^0.5.12+4
   camera:
   path_provider:

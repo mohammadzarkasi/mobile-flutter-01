@@ -3,6 +3,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- <uses-permission android:name="android.permission.L" ACCESS_COARSE_LOCATION --> 
     <uses-feature android:name="android.hardware.camera"/>
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -11,8 +12,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="abc_flutter"
-        android:icon="@mipmap/ic_launcher">
+        android:label="App Belajar GPS"
+        android:icon="@mipmap/icon2">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

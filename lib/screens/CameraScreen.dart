@@ -7,8 +7,11 @@ import 'package:permission_handler/permission_handler.dart' as permhand;
 
 class CameraScreen extends StatefulWidget {
   CameraDescription camera;
+  int angka = 0;
 
-  CameraScreen({this.camera});
+  CameraScreen({this.camera}) {
+    print('constructor CAMERA SCREEN');
+  }
 
   @override
   _CameraScreenState createState() => _CameraScreenState();
@@ -23,6 +26,7 @@ class _CameraScreenState extends State<CameraScreen> {
     super.initState();
     print('CAMERA SCREEN: init state');
     _initController();
+    // widget.angka
   }
 
   void dispose() {
@@ -76,7 +80,7 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  pressCamera() async {
+  void pressCamera() async {
     print('camera action pressed');
     // var tempDir = await getTemporaryDirectory();
     var tempDir = await pathprov.getTemporaryDirectory();
@@ -97,6 +101,9 @@ class _CameraScreenState extends State<CameraScreen> {
 
     saveDir = extstor1;
     saveDir = extstor2;
+
+    print('pathprov exdir: ${extdir.path}');
+    print('exstor exdir: $extstor1');
     // saveDir = downDir.path;
     // saveDir = libdir.path;
     var dt = DateTime.now();
